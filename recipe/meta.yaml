@@ -1,7 +1,7 @@
 {% set name = "proteus" %}
-{% set version = "1.7.0" %}
+{% set version = "1.7.1" %}
 {% set build = 0 %}
-{% set sha256 = "a36a231ea2d346bf9ef121d0cdac8d6130948d2fff9120e18a74da61ea9d9f62" %}
+{% set sha256 = "fa92cc384a83d6ad9ba3ce52aa4d8f7ed7624c97a597fd9faadfce553af5c9fe" %}
 
 {% set mpi = mpi or 'mpich' %}
 
@@ -13,9 +13,6 @@ source:
   fn: proteus-{{ version }}.tar.gz
   url: https://github.com/erdc-cm/proteus/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    - edit_content1.patch
-    - edit_content2.patch
 
 build:
   number: {{ build }}
