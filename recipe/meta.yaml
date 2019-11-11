@@ -11,7 +11,7 @@ package:
 
 source:
   fn: proteus-{{ version }}.tar.gz
-  url: https://github.com/erdc-cm/proteus/archive/{{ version }}.tar.gz
+  url: https://github.com/erdc/proteus/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
@@ -73,7 +73,7 @@ about:
   license_family: MIT
   license_file: LICENSE.md
   summary: Proteus is a Python package for rapidly developing computer models and numerical methods.
-  dev_url: https://github.com/erdc-cm/proteus
+  dev_url: https://github.com/erdc/proteus
 
 extra:
   recipe-maintainers:
