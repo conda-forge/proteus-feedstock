@@ -60,8 +60,14 @@ requirements:
     - tetgen
     - ncurses
     - pychrono
-    - {{ pin_compatible('openblas', max_pin='x.x') }}
     - python 3
+    - future
+    - ipyparallel
+    - pillow
+    - recordtype
+    - {{ pin_compatible('openblas', max_pin='x.x') }}
+    - {{ pin_compatible('petsc4py', max_pin='x.x') }}
+    - {{ pin_compatible('cython', max_pin='x.x') }}
 
 test:
   imports:
