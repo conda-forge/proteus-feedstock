@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.7.1" %}
-{% set build = 1 %}
+{% set build = 2 %}
 {% set sha256 = "fa92cc384a83d6ad9ba3ce52aa4d8f7ed7624c97a597fd9faadfce553af5c9fe" %}
 
 {% set mpi = mpi or 'mpich' %}
@@ -52,6 +52,7 @@ requirements:
     # - gmsh        [not osx]
     - matplotlib
     - mpi4py
+    - h5py =*=*mpich*
     - nose
     - pytables
     - pytest
@@ -85,3 +86,4 @@ extra:
   recipe-maintainers:
     - davidbrochart
     - SylvainCorlay
+    - martinRenou
