@@ -66,6 +66,7 @@ requirements:
     - ipyparallel
     - pillow
     - recordtype
+    - triangle
     - {{ pin_compatible('openblas', max_pin='x.x') }}
     - {{ pin_compatible('petsc4py', max_pin='x.x') }}
     - {{ pin_compatible('cython', max_pin='x.x') }}
