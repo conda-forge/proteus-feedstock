@@ -3,8 +3,6 @@
 {% set build = 3 %}
 {% set sha256 = "fa92cc384a83d6ad9ba3ce52aa4d8f7ed7624c97a597fd9faadfce553af5c9fe" %}
 
-{% set mpi = mpi or 'mpich' %}
-
 package:
   name: {{ name }}
   version: {{ version }}
@@ -31,20 +29,20 @@ requirements:
   host:
     - setuptools
     - cython
-    - daetk 1.0.1
+    - daetk
     - hdf5 =*=*mpich*
-    - metis 5
+    - metis
     - {{ mpi }}
     - numpy 1.14
-    - openblas 0.2
-    - parmetis 4.0
-    - petsc4py 3.11
-    - petsc 3.11
+    - openblas
+    - parmetis
+    - petsc4py
+    - petsc
     - python 3
     - scorec
-    - superlu 5
-    - superlu_dist 6
-    - triangle 1.6
+    - superlu
+    - superlu_dist
+    - triangle
     - pychrono
     - mpi4py
   run:
