@@ -37,7 +37,7 @@ requirements:
     - openblas
     - parmetis
     - petsc4py
-    - petsc
+    - petsc 3.11
     - python 3
     - scorec
     - superlu
