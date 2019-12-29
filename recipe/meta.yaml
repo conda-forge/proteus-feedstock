@@ -37,8 +37,8 @@ requirements:
     - numpy 1.14
     - openblas 0.3.7
     - parmetis
-    - petsc4py
-    - petsc
+    - petsc4py 3.11
+    - petsc 3.11
     - python 3
     - scorec
     - superlu
