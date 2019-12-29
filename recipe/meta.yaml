@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.7.1" %}
-{% set build = 6 %}
+{% set build = 7 %}
 {% set sha256 = "fa92cc384a83d6ad9ba3ce52aa4d8f7ed7624c97a597fd9faadfce553af5c9fe" %}
 
 package:
@@ -37,8 +37,8 @@ requirements:
     - numpy 1.14
     - openblas 0.3.7
     - parmetis
-    - petsc4py
-    - petsc
+    - petsc4py 3.11
+    - petsc 3.11
     - python 3
     - scorec
     - superlu
