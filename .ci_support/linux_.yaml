@@ -20,14 +20,8 @@ metis:
 - '5.1'
 mpi:
 - mpich
-openblas:
-- 0.3.6
-petsc:
-- '3.12'
 petsc4py:
 - '3.12'
 pin_run_as_build:
   metis:
     max_pin: x.x
-  openblas:
-    max_pin: x.x.x
