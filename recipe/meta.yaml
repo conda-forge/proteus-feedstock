@@ -3,8 +3,6 @@
 {% set build = 0 %}
 {% set sha256 = "324c635286d562861f5e4156c69f841bab24b1f8193c6e20e48aa25621a53bca" %}
 
-{% set mpi = mpi or 'mpich' %}
-
 package:
   name: {{ name }}
   version: {{ version }}
@@ -31,20 +29,21 @@ requirements:
   host:
     - setuptools
     - cython
-    - daetk 1.0.1
-    - hdf5 =*=*mpich*
-    - metis 5
+    - pip
+    - daetk
+    - hdf5 =1.10.5=*mpich*
+    - metis
     - {{ mpi }}
     - numpy 1.14
-    - openblas 0.2
-    - parmetis 4.0
-    - petsc4py 3.11
-    - petsc 3.11
+    - openblas =0.3.7=*_7
+    - parmetis
+    - petsc4py
+    - petsc 3.12
     - python 3
     - scorec
-    - superlu 5
-    - superlu_dist 6
-    - triangle 1.6
+    - superlu
+    - superlu_dist
+    - triangle
     - pychrono
     - mpi4py
   run:
@@ -70,10 +69,11 @@ requirements:
     - {{ pin_compatible('openblas', max_pin='x.x') }}
     - {{ pin_compatible('petsc4py', max_pin='x.x') }}
     - {{ pin_compatible('cython', max_pin='x.x') }}
+    - {{ pin_compatible('numpy') }}
 
 test:
   imports:
-    - proteus
+    - proteus.clapack
 
 about:
   home: http://proteustoolkit.org
