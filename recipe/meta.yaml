@@ -46,6 +46,7 @@ requirements:
     - triangle
     - pychrono
     - mpi4py
+    - xtensor-python
   run:
     # This is an optional dependency
     # - gmsh        [not osx]
