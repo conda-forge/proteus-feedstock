@@ -1,4 +1,4 @@
-sed -i -e '8,12d' setup.py
+sed -i -e '8d' setup.py
 
 export PROTEUS_PREFIX=$PREFIX
 
