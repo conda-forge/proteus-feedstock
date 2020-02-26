@@ -44,7 +44,7 @@ requirements:
     - superlu
     - superlu_dist
     - triangle
-    - pychrono
+    - pychrono 4.0.0
     - mpi4py
     - xtensor-python
     - eigen
