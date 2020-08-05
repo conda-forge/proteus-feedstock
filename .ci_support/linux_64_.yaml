@@ -25,3 +25,5 @@ petsc4py:
 pin_run_as_build:
   metis:
     max_pin: x.x
+target_platform:
+- linux-64
