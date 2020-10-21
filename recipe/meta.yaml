@@ -47,6 +47,7 @@ requirements:
     - pychrono
     - mpi4py
     - xtensor-python
+    - eigen
   run:
     # This is an optional dependency
     # - gmsh        [not osx]
