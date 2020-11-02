@@ -54,7 +54,7 @@ requirements:
   run:
     # This is an optional dependency
     # - gmsh        [not osx]
-    - matplotlib
+    - matplotlib-base
     - mpi4py
     - nose
     - pytables
