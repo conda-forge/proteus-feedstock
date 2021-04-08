@@ -35,6 +35,11 @@ petsc4py:
 pin_run_as_build:
   metis:
     max_pin: x.x
+  python:
+    min_pin: x.x
+    max_pin: x.x
+python:
+- 3.9.* *_cpython
 target_platform:
 - linux-64
 zip_keys:
@@ -43,3 +48,5 @@ zip_keys:
   - fortran_compiler_version
 - - cdt_name
   - docker_image
+- - python
+  - numpy
