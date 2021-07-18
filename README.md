@@ -147,4 +147,5 @@ Feedstock Maintainers
 * [@jan-janssen](https://github.com/jan-janssen/)
 * [@martinRenou](https://github.com/martinRenou/)
 * [@zhang-alvin](https://github.com/zhang-alvin/)
+* [@cekees](https://github.com/cekees/)
 
