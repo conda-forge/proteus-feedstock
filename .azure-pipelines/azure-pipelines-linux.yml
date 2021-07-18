@@ -5,11 +5,11 @@
 jobs:
 - job: linux
   pool:
-    vmImage: ubuntu-16.04
+    vmImage: ubuntu-latest
   strategy:
     matrix:
-      linux_64_numpy1.16:
-        CONFIG: linux_64_numpy1.16
+      linux_64_numpy1.17:
+        CONFIG: linux_64_numpy1.17
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
       linux_64_numpy1.19:
