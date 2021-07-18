@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.8.0" %}
-{% set build = 1 %}
+{% set build = 2 %}
 {% set sha256 = "097cc8df364c7ec09f0e8ea3728f2fb2fce5df6a2789d3f17dfcaf1249e381da" %}
 
 package:
@@ -14,7 +14,7 @@ source:
 
 build:
   number: {{ build }}
-  skip: True  # [not linux]
+  skip: True  # [win]
   {% set mpi_prefix = "mpi_" + mpi %}
   string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
   run_exports:
@@ -82,7 +82,11 @@ requirements:
     - h5py * {{ mpi_prefix }}_*
 test:
   imports:
-    - proteus.clapack
+    - proteus
+  requires:
+    - pytest
+  commands:
+    - pytest -v --pyargs proteus.tests.ci.test_meshPartitionFromTetgenFiles
 
 about:
   home: http://proteustoolkit.org

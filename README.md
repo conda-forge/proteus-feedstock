@@ -42,6 +42,20 @@ Current build status
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/proteus-feedstock?branchName=master&jobName=linux&configuration=linux_64_numpy1.19" alt="variant">
                 </a>
               </td>
+            </tr><tr>
+              <td>osx_64_numpy1.17</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8293&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/proteus-feedstock?branchName=master&jobName=osx&configuration=osx_64_numpy1.17" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_numpy1.19</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8293&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/proteus-feedstock?branchName=master&jobName=osx&configuration=osx_64_numpy1.19" alt="variant">
+                </a>
+              </td>
             </tr>
           </tbody>
         </table>
