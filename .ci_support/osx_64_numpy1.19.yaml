@@ -5,7 +5,7 @@ c_compiler:
 c_compiler_version:
 - '11'
 channel_sources:
-- conda-forge,defaults
+- conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
@@ -17,7 +17,7 @@ fortran_compiler:
 fortran_compiler_version:
 - '9'
 hdf5:
-- 1.10.6
+- 1.12.1
 macos_machine:
 - x86_64-apple-darwin13.4.0
 metis:
@@ -29,9 +29,9 @@ numpy:
 openblas:
 - 0.3.*
 petsc:
-- '3.14'
+- '3.15'
 petsc4py:
-- '3.14'
+- '3.15'
 pin_run_as_build:
   metis:
     max_pin: x.x
