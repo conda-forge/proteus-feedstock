@@ -25,7 +25,7 @@ metis:
 mpi:
 - mpich
 numpy:
-- '1.19'
+- '1.21'
 openblas:
 - 0.3.*
 petsc:
