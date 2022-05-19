@@ -1,2 +1,4 @@
 mpi:
   - mpich
+pychrono:
+  - 6
