@@ -39,6 +39,8 @@ petsc4py:
 pin_run_as_build:
   metis:
     max_pin: x.x
+pychrono:
+- '6'
 superlu_dist:
 - 7.1.1
 target_platform:
