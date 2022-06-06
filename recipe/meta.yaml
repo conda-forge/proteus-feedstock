@@ -11,6 +11,8 @@ source:
   fn: proteus-{{ version }}.tar.gz
   url: https://github.com/erdc/proteus/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    - recordtype.patch
 
 build:
   number: {{ build }}
