@@ -1,15 +1,15 @@
-From 5fab3255b510d62330721eb846dcde166c5c35a3 Mon Sep 17 00:00:00 2001
+From d9ef9a9ab35813aed0fa5b831e30347ffa55f090 Mon Sep 17 00:00:00 2001
 From: Jan Janssen <jan-janssen@users.noreply.github.com>
-Date: Mon, 6 Jun 2022 09:11:25 -0600
+Date: Mon, 6 Jun 2022 09:49:59 -0600
 Subject: [PATCH] Replace recordtype with namedlist
 
 ---
  Makefile            |  2 +-
  environment-dev.yml |  2 +-
  environment.yml     |  3 +--
- proteus/Context.py  |  4 ++--
- proteus/defaults.py | 10 +++++-----
- 5 files changed, 10 insertions(+), 11 deletions(-)
+ proteus/Context.py  |  6 +++---
+ proteus/defaults.py | 26 +++++++++++++-------------
+ 5 files changed, 19 insertions(+), 20 deletions(-)
 
 diff --git a/Makefile b/Makefile
 index 27d0ac1b4f..57016efa67 100644
@@ -63,7 +63,7 @@ index 076dfe954d..8a9701561a 100644
 -  - pip:
 -    - recordtype
 diff --git a/proteus/Context.py b/proteus/Context.py
-index aad2b25129..e43f6b4f4b 100644
+index aad2b25129..98e7b2f530 100644
 --- a/proteus/Context.py
 +++ b/proteus/Context.py
 @@ -27,7 +27,7 @@
@@ -84,8 +84,17 @@ index aad2b25129..e43f6b4f4b 100644
          context = Context()
      else:
          Context = namedtuple(moduleIn.__name__.split('.')[-1], list(fields.keys()))
+@@ -106,7 +106,7 @@ def Options(optionsList=None,mutable=False):
+                 logEvent("IGNORING CONTEXT OPTION; DECLARE "+lvalue+" IF YOU WANT TO SET IT")
+     #now set named tuple merging optionsList and opts_cli_dihelpct
+     if mutable:
+-        ContextOptions = recordtype("ContextOptions", iter(contextOptionsDict.items()))
++        ContextOptions = namedlist("ContextOptions", iter(contextOptionsDict.items()))
+         return ContextOptions()
+     else:
+         ContextOptions = namedtuple("ContextOptions", list(contextOptionsDict.keys()))
 diff --git a/proteus/defaults.py b/proteus/defaults.py
-index e6b18bc698..0484b4a618 100644
+index e6b18bc698..08551ff44b 100644
 --- a/proteus/defaults.py
 +++ b/proteus/defaults.py
 @@ -1,4 +1,4 @@
@@ -109,3 +118,33 @@ index e6b18bc698..0484b4a618 100644
  class Physics_base(_Physics_base):
      __frozen = False
  
+@@ -143,10 +143,10 @@ def load_physics(pModule, path='.'):
+     else:
+         numerics_excluded_keys.append(k)
+ 
+-_Numerics_base = recordtype.recordtype('Numerics_base',
+-                                      [(k,default_n.__dict__[k])
+-                                       for k in numerics_default_keys],
+-                                      use_slots=False)
++_Numerics_base = namedlist.namedlist('Numerics_base',
++                                    [(k,default_n.__dict__[k])
++                                     for k in numerics_default_keys],
++                                    use_slots=False)
+ class Numerics_base(_Numerics_base):
+     __frozen = False
+ 
+@@ -212,10 +212,10 @@ def load_numerics(nModule, path='.'):
+     else:
+         system_excluded_keys.append(k)
+ 
+-_System_base = recordtype.recordtype('System_base',
+-                                    [(k,default_so.__dict__[k])
+-                                     for k in system_default_keys],
+-                                    use_slots=False)
++_System_base = namedlist.namedlist('System_base',
++                                  [(k,default_so.__dict__[k])
++                                   for k in system_default_keys],
++                                  use_slots=False)
+ 
+ class System_base(_System_base):
+     def __init__(self, **args):
