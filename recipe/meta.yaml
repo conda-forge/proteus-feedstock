@@ -1,7 +1,7 @@
 {% set name = "proteus" %}
-{% set version = "1.8.0" %}
-{% set build = 6 %}
-{% set sha256 = "097cc8df364c7ec09f0e8ea3728f2fb2fce5df6a2789d3f17dfcaf1249e381da" %}
+{% set version = "1.8.1" %}
+{% set build = 0 %}
+{% set sha256 = "5237de14b9268612e521b86986afa072b89e67771205c9f2b835b7c5f7261310" %}
 
 package:
   name: {{ name }}
@@ -14,9 +14,9 @@ source:
 
 build:
   number: {{ build }}
-  skip: True  # [win]
+  skip: true  # [win]
   {% set mpi_prefix = "mpi_" + mpi %}
-  string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
+  string: {{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}
   run_exports:
     - {{ name }} * {{ mpi_prefix }}_*
 
