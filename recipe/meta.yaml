@@ -48,33 +48,30 @@ requirements:
     - mpi4py
     - xtensor-python
     - eigen
-    # need to list libnetcdf and netcdf-fortran twice to get version
     # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
     - hdf5
     - hdf5 * {{ mpi_prefix }}_*
   run:
     # This is an optional dependency
     # - gmsh        [not osx]
+    #for testing
     - matplotlib-base
-    - mpi4py
-    - nose
     - pytest
     - pytest-xdist
+    #
+    - mpi4py
     - scipy
     - tetgen
     - ncurses
     - pychrono
     - python 3
     - future
-    - ipyparallel
     - pillow
-    - recordtype
     - triangle
     - {{ pin_compatible('openblas', max_pin='x.x') }}
     - {{ pin_compatible('petsc4py', max_pin='x.x') }}
     - {{ pin_compatible('cython', max_pin='x.x') }}
     - {{ pin_compatible('numpy') }}
-    # need to list libnetcdf and netcdf-fortran twice to get version
     # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
     - hdf5
     - hdf5 * {{ mpi_prefix }}_*
