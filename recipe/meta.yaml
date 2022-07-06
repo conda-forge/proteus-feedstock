@@ -44,7 +44,7 @@ requirements:
     - triangle
     - superlu
     - superlu_dist
-    - pychrono 7
+    - pychrono >=7
     - mpi4py
     - xtensor-python
     - eigen
@@ -63,7 +63,7 @@ requirements:
     - scipy
     - tetgen
     - ncurses
-    - pychrono 7
+    - pychrono >=7
     - python 3
     - future
     - pillow
