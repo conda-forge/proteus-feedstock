@@ -1,7 +1,7 @@
 {% set name = "proteus" %}
-{% set version = "1.8.0" %}
-{% set build = 6 %}
-{% set sha256 = "097cc8df364c7ec09f0e8ea3728f2fb2fce5df6a2789d3f17dfcaf1249e381da" %}
+{% set version = "1.8.1" %}
+{% set build = 0 %}
+{% set sha256 = "5237de14b9268612e521b86986afa072b89e67771205c9f2b835b7c5f7261310" %}
 
 package:
   name: {{ name }}
@@ -14,9 +14,9 @@ source:
 
 build:
   number: {{ build }}
-  skip: True  # [win]
+  skip: true  # [win]
   {% set mpi_prefix = "mpi_" + mpi %}
-  string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
+  string: {{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}
   run_exports:
     - {{ name }} * {{ mpi_prefix }}_*
 
@@ -44,37 +44,34 @@ requirements:
     - triangle
     - superlu
     - superlu_dist
-    - pychrono
+    - pychrono >=7
     - mpi4py
     - xtensor-python
     - eigen
-    # need to list libnetcdf and netcdf-fortran twice to get version
     # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
     - hdf5
     - hdf5 * {{ mpi_prefix }}_*
   run:
     # This is an optional dependency
     # - gmsh        [not osx]
+    #for testing
     - matplotlib-base
-    - mpi4py
-    - nose
     - pytest
     - pytest-xdist
+    #
+    - mpi4py
     - scipy
     - tetgen
     - ncurses
-    - pychrono
+    - pychrono >=7
     - python 3
     - future
-    - ipyparallel
     - pillow
-    - recordtype
     - triangle
     - {{ pin_compatible('openblas', max_pin='x.x') }}
     - {{ pin_compatible('petsc4py', max_pin='x.x') }}
     - {{ pin_compatible('cython', max_pin='x.x') }}
     - {{ pin_compatible('numpy') }}
-    # need to list libnetcdf and netcdf-fortran twice to get version
     # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
     - hdf5
     - hdf5 * {{ mpi_prefix }}_*
