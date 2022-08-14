@@ -17,7 +17,7 @@ fortran_compiler:
 fortran_compiler_version:
 - '9'
 hdf5:
-- 1.12.1
+- 1.12.2
 macos_machine:
 - x86_64-apple-darwin13.4.0
 metis:
@@ -39,8 +39,6 @@ petsc4py:
 pin_run_as_build:
   metis:
     max_pin: x.x
-pychrono:
-- '6'
 superlu_dist:
 - 7.1.1
 target_platform:
