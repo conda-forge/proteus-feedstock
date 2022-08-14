@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.8.1" %}
-{% set build = 0 %}
+{% set build = 1 %}
 {% set sha256 = "5237de14b9268612e521b86986afa072b89e67771205c9f2b835b7c5f7261310" %}
 
 package:
