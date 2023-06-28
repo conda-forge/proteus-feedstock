@@ -64,7 +64,7 @@ requirements:
     - tetgen
     - ncurses
     - pychrono >=7
-    - python 3
+    - python
     - future
     - pillow
     - triangle
