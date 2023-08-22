@@ -28,19 +28,19 @@ requirements:
     - make
   host:
     - setuptools
-    - cython
+    - cython >=3
     - pybind11
     - pip
     - daetk
-    - metis
+    - metis >=5.1.1
     - {{ mpi }}
-    - numpy
+    - numpy >=1.25.1
     - openblas
-    - parmetis
+    - parmetis >=4.0.3
     - petsc4py
-    - petsc
+    - petsc >=3.19.2
     - python 3
-    - scorec
+    - scorec >=2.2.7
     - triangle
     - superlu
     - superlu_dist
@@ -52,8 +52,6 @@ requirements:
     - hdf5
     - hdf5 * {{ mpi_prefix }}_*
   run:
-    # This is an optional dependency
-    # - gmsh        [not osx]
     #for testing
     - matplotlib-base
     - pytest
@@ -66,7 +64,6 @@ requirements:
     - pychrono >=7
     - python 3
     - future
-    - pillow
     - triangle
     - {{ pin_compatible('openblas', max_pin='x.x') }}
     - {{ pin_compatible('petsc4py', max_pin='x.x') }}
