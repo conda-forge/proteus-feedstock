@@ -37,7 +37,7 @@ requirements:
     - numpy >=1.25.1
     - openblas
     - parmetis >=4.0.3
-    - petsc4py
+    - petsc4py >=3.19
     - petsc >=3.19.3
     - python 3
     - scorec >=2.2.7
