@@ -17,25 +17,17 @@ fortran_compiler:
 fortran_compiler_version:
 - '12'
 hdf5:
-- 1.12.2
+- 1.14.1
 macos_machine:
 - x86_64-apple-darwin13.4.0
-metis:
-- '5.1'
 mpi:
 - mpich
 mpich:
 - '4'
-numpy:
-- '1.22'
 openblas:
 - 0.3.*
 openmpi:
 - '4'
-petsc:
-- '3.18'
-petsc4py:
-- '3.18'
 superlu_dist:
 - 7.1.1
 target_platform:
