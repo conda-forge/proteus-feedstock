@@ -14,7 +14,8 @@ source:
 
 build:
   number: {{ build }}
-  skip: true  # [win]
+  # pychrono doens't have builds after Python 3.10
+  skip: true  # [win or py>310]
   {% set mpi_prefix = "mpi_" + mpi %}
   string: {{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}
   run_exports:
