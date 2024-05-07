@@ -35,7 +35,7 @@ requirements:
     - daetk
     - metis
     - {{ mpi }}
-    - numpy >=1.25.1
+    - numpy 1.25
     - openblas
     - parmetis >=4.0.3
     - petsc4py
