@@ -1,9 +1,9 @@
 MACOSX_DEPLOYMENT_TARGET:
-- '10.9'
+- '10.13'
 c_compiler:
 - clang
 c_compiler_version:
-- '15'
+- '16'
 channel_sources:
 - conda-forge
 channel_targets:
@@ -11,15 +11,17 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '15'
+- '16'
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
 - '12'
 hdf5:
-- 1.14.1
+- 1.14.3
 macos_machine:
 - x86_64-apple-darwin13.4.0
+metis:
+- 5.1.0
 mpi:
 - mpich
 mpich:
@@ -28,8 +30,20 @@ openblas:
 - 0.3.*
 openmpi:
 - '4'
+petsc:
+- '3.20'
+petsc4py:
+- '3.20'
+pin_run_as_build:
+  python:
+    min_pin: x.x
+    max_pin: x.x
+pychrono:
+- '7'
+python:
+- 3.8.* *_cpython
 superlu_dist:
-- 7.1.1
+- '8'
 target_platform:
 - osx-64
 zip_keys:
