@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.8.2" %}
-{% set build = 1 %}
+{% set build = 2 %}
 {% set sha256 = "bd22a7dfac25977e8d040e4332e8013dd5088b1685fe22b0f4e31e6182a10a5a" %}
 
 package:
@@ -32,24 +32,24 @@ requirements:
     - pybind11
     - pip
     - daetk
-    - metis >=5.1.1
+    - metis
     - {{ mpi }}
     - numpy >=1.25.1
     - openblas
     - parmetis >=4.0.3
-    - petsc4py >=3.19
-    - petsc >=3.19.3
-    - python 3
+    - petsc4py
+    - petsc
+    - python
     - scorec >=2.2.7
     - triangle
     - superlu
     - superlu_dist
-    - pychrono >=7
+    - pychrono
     - mpi4py
     - xtensor-python
     - eigen
     # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
-    - hdf5 >=1.14.1
+    - hdf5
     - hdf5 * {{ mpi_prefix }}_*
   run:
     #for testing
