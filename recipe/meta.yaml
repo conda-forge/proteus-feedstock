@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.8.2" %}
-{% set build = 1 %}
+{% set build = 2 %}
 {% set sha256 = "bd22a7dfac25977e8d040e4332e8013dd5088b1685fe22b0f4e31e6182a10a5a" %}
 
 package:
@@ -23,6 +23,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
     - make
@@ -68,7 +69,6 @@ requirements:
     - {{ pin_compatible('openblas', max_pin='x.x') }}
     - {{ pin_compatible('petsc4py', max_pin='x.x') }}
     - {{ pin_compatible('cython', max_pin='x.x') }}
-    - {{ pin_compatible('numpy') }}
     # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
     - hdf5
     - hdf5 * {{ mpi_prefix }}_*
