@@ -1,7 +1,7 @@
 {% set name = "proteus" %}
-{% set version = "1.8.2" %}
-{% set build = 1 %}
-{% set sha256 = "bd22a7dfac25977e8d040e4332e8013dd5088b1685fe22b0f4e31e6182a10a5a" %}
+{% set version = "1.8.3" %}
+{% set build = 0 %}
+{% set sha256 = "315f0600044e2ad86592c248a9a4ca87dc58c1d678af2c27a9ddde802b555618" %}
 
 package:
   name: {{ name }}
@@ -31,20 +31,19 @@ requirements:
     - cython >=3
     - pybind11
     - pip
-    - daetk
-    - metis >=5.1.1
+    - metis >=5.1.0
     - {{ mpi }}
     - numpy >=1.25.1
     - openblas
     - parmetis >=4.0.3
-    - petsc4py >=3.19
-    - petsc >=3.19.3
+    - petsc4py >=3.21
+    - petsc >=3.21
     - python 3
-    - scorec >=2.2.7
+    - scorec >=2.2.8
     - triangle
     - superlu
     - superlu_dist
-    - pychrono >=7
+    - pychrono >=9
     - mpi4py
     - xtensor-python
     - eigen
@@ -55,13 +54,14 @@ requirements:
     #for testing
     - matplotlib-base
     - pytest
-    - pytest-xdist
+    - pytest-forked
     #
     - mpi4py
     - scipy
     - tetgen
     - ncurses
-    - pychrono >=7
+    - pychrono >=9
+    - scorec >=2.2.8
     - python 3
     - future
     - triangle
@@ -80,7 +80,7 @@ test:
   requires:
     - pytest
   commands:
-    - pytest -v --pyargs proteus.tests.ci.test_meshPartitionFromTetgenFiles
+    - pytest -v ./tests/ci/test_meshPartitionFromTetgenFiles.py
 
 about:
   home: http://proteustoolkit.org
