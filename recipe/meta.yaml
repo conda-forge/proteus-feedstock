@@ -81,7 +81,7 @@ test:
   requires:
     - pytest
   commands:
-    - pytest -v ./tests/ci/test_meshPartitionFromTetgenFiles.py
+    - pytest -v ./test/ci/test_meshPartitionFromTetgenFiles.py
 
 about:
   home: http://proteustoolkit.org
