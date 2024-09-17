@@ -26,6 +26,8 @@ hdf5:
 - 1.14.3
 macos_machine:
 - x86_64-apple-darwin13.4.0
+metis:
+- 5.1.0
 mpi:
 - mpich
 mpich:
@@ -34,6 +36,20 @@ openblas:
 - 0.3.*
 openmpi:
 - '4'
+petsc:
+- '3.21'
+petsc4py:
+- '3.21'
+pin_run_as_build:
+  python:
+    min_pin: x.x
+    max_pin: x.x
+pychrono:
+- '9'
+python:
+- 3.12.* *_cpython
+scorec:
+- 2.2.8
 superlu_dist:
 - '9'
 target_platform:
