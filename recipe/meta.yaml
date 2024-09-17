@@ -41,7 +41,6 @@ requirements:
     - petsc
     - python
     - scorec
-    - triangle
     - superlu
     - superlu_dist
     - pychrono
@@ -65,7 +64,6 @@ requirements:
     - scorec
     - python 3
     - future
-    - triangle
     - {{ pin_compatible('openblas', max_pin='x.x') }}
     - {{ pin_compatible('petsc4py', max_pin='x.x') }}
     - {{ pin_compatible('cython', max_pin='x.x') }}
