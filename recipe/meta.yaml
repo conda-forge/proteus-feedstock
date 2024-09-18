@@ -52,11 +52,6 @@ requirements:
     - hdf5
     - hdf5 * {{ mpi_prefix }}_*
   run:
-    #for testing
-    - matplotlib-base
-    - pytest
-    - pytest-forked
-    #
     - mpi4py
     - scipy
     - tetgen
@@ -65,7 +60,6 @@ requirements:
     - pychrono
     - scorec
     - python 3
-    - future
     - {{ pin_compatible('openblas', max_pin='x.x') }}
     - {{ pin_compatible('petsc4py', max_pin='x.x') }}
     - {{ pin_compatible('cython', max_pin='x.x') }}
@@ -81,6 +75,8 @@ test:
     - test
   requires:
     - pytest
+    - pytest-forked
+    - matplotlib-base
   commands:
     - pytest -v test/ci/test_meshPartitionFromTetgenFiles.py
 
