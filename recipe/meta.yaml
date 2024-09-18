@@ -41,6 +41,7 @@ requirements:
     - petsc
     - python
     - scorec
+    - triangle
     - superlu
     - superlu_dist
     - pychrono
@@ -59,6 +60,7 @@ requirements:
     - mpi4py
     - scipy
     - tetgen
+    - triangle
     - ncurses
     - pychrono
     - scorec
