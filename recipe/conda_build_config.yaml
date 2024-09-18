@@ -1,6 +1,5 @@
 mpi:
   - mpich
-  - openmpi
 pychrono:
   - 9
 scorec:
