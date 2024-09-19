@@ -36,15 +36,15 @@ requirements:
     - {{ mpi }}
     - numpy >=1.25.1
     - openblas
-    - parmetis >=4.0.3
+    - parmetis
     - petsc4py
     - petsc
     - python
-    - scorec
+    - scorec >=2.2.8
     - triangle
     - superlu
     - superlu_dist
-    - pychrono
+    - pychrono >=9
     - mpi4py
     - xtensor-python
     - eigen
@@ -57,8 +57,8 @@ requirements:
     - tetgen
     - triangle
     - ncurses
-    - pychrono
-    - scorec
+    - pychrono >=9
+    - scorec >=2.2.8
     - python 3
     - {{ pin_compatible('openblas', max_pin='x.x') }}
     - {{ pin_compatible('petsc4py', max_pin='x.x') }}

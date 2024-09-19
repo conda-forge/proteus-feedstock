@@ -1,7 +1,3 @@
 mpi:
   - mpich
-  - openmpi # [linux]
-pychrono:
-  - 9
-scorec:
-  - 2.2.8
+  - openmpi
