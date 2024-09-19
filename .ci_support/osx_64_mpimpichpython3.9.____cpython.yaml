@@ -44,12 +44,8 @@ pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
-pychrono:
-- '9'
 python:
-- 3.11.* *_cpython
-scorec:
-- 2.2.8
+- 3.9.* *_cpython
 superlu_dist:
 - '9'
 target_platform:

@@ -29,7 +29,7 @@ macos_machine:
 metis:
 - 5.1.0
 mpi:
-- mpich
+- openmpi
 mpich:
 - '4'
 openblas:
@@ -44,12 +44,8 @@ pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
-pychrono:
-- '9'
 python:
-- 3.12.* *_cpython
-scorec:
-- 2.2.8
+- 3.10.* *_cpython
 superlu_dist:
 - '9'
 target_platform:
