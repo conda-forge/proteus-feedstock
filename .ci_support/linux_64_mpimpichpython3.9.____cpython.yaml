@@ -24,6 +24,8 @@ fortran_compiler_version:
 - '13'
 hdf5:
 - 1.14.3
+metis:
+- 5.1.0
 mpi:
 - mpich
 mpich:
@@ -31,7 +33,17 @@ mpich:
 openblas:
 - 0.3.*
 openmpi:
-- '4'
+- '5'
+petsc:
+- '3.21'
+petsc4py:
+- '3.21'
+pin_run_as_build:
+  python:
+    min_pin: x.x
+    max_pin: x.x
+python:
+- 3.9.* *_cpython
 superlu_dist:
 - '9'
 target_platform:
