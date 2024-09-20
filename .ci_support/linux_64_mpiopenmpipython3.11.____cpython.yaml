@@ -33,7 +33,7 @@ mpich:
 openblas:
 - 0.3.*
 openmpi:
-- '4'
+- '5'
 petsc:
 - '3.21'
 petsc4py:
