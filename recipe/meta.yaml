@@ -46,6 +46,8 @@ requirements:
     - superlu_dist
     - pychrono >=9
     - mpi4py
+    # include-paths changed in 0.25
+    - xtensor <0.26
     - xtensor-python
     - eigen
     # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
