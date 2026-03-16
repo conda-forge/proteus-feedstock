@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.8.3" %}
-{% set build = 2 %}
+{% set build = 3 %}
 {% set sha256 = "315f0600044e2ad86592c248a9a4ca87dc58c1d678af2c27a9ddde802b555618" %}
 
 package:
@@ -46,6 +46,8 @@ requirements:
     - superlu_dist
     - pychrono >=9
     - mpi4py
+    # include-paths changed in 0.25
+    - xtensor <0.26
     - xtensor-python
     - eigen
     # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
