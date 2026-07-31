@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.8.3" %}
-{% set build = 6 %}
+{% set build = 7 %}
 {% set sha256 = "315f0600044e2ad86592c248a9a4ca87dc58c1d678af2c27a9ddde802b555618" %}
 
 package:
@@ -59,7 +59,7 @@ requirements:
     - triangle
     - superlu
     - superlu_dist
-    - pychrono >=9
+    - pychrono >=9,<10
     - mpi4py
     # include-paths changed in 0.25
     - xtensor <0.26
@@ -74,7 +74,7 @@ requirements:
     - tetgen
     - triangle
     - ncurses
-    - pychrono >=9
+    - pychrono >=9,<10
     - scorec >=2.2.8
     - python 3
     - {{ pin_compatible('openblas', max_pin='x.x') }}
