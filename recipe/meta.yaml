@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.8.3" %}
-{% set build = 5 %}
+{% set build = 6 %}
 {% set sha256 = "315f0600044e2ad86592c248a9a4ca87dc58c1d678af2c27a9ddde802b555618" %}
 
 package:
@@ -41,15 +41,18 @@ requirements:
     - petsc
     # real_*, not complex_*: proteus's C++ is built with -DPETSC_SKIP_COMPLEX
     # and assumes real PETSC_SCALAR throughout. Without this filter the
-    # solver is free to pick either scalar variant, and petsc's complex
-    # build doesn't necessarily have a release matching our mpich/hdf5 pins
-    # (e.g. petsc-3.25.0's complex build is linked against mpich>=5, while
-    # our hdf5 1.14.6 pin only has mpich 4.x-linked builds). Kept as a
-    # separate entry (like hdf5's mpi_prefix filter below) rather than
-    # replacing the bare "petsc"/"petsc4py" lines above, since conda-build's
-    # variant-based version pinning (from conda_build_config.yaml) is only
-    # applied to a literal bare package name in the recipe text.
-    - petsc4py * real_*
+    # solver is free to pick either scalar variant. Kept as a separate entry
+    # (like hdf5's mpi_prefix filter below) rather than replacing the bare
+    # "petsc" line above, since conda-build's variant-based version pinning
+    # (from conda_build_config.yaml) is only applied to a literal bare
+    # package name in the recipe text.
+    #
+    # petsc4py itself has no equivalent "real_*"/"complex_*" build string
+    # (its own recipe.yaml has no `build.string` override, just a generic
+    # hash) -- it's already correctly filtered indirectly, since its own
+    # host requirement is `petsc ${version_xy}.* ${scalar}_*`, so once
+    # petsc itself is pinned to real_* here, any petsc4py built against
+    # complex petsc becomes unsatisfiable on its own.
     - petsc * real_*
     - python
     - scorec >=2.2.8
