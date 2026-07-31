@@ -31,7 +31,7 @@ metis:
 mpi:
 - openmpi
 mpich:
-- '4'
+- '5'
 openblas:
 - 0.3.*
 openmpi:
