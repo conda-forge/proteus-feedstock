@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.8.3" %}
-{% set build = 7 %}
+{% set build = 8 %}
 {% set sha256 = "315f0600044e2ad86592c248a9a4ca87dc58c1d678af2c27a9ddde802b555618" %}
 
 package:
@@ -35,7 +35,15 @@ requirements:
     - metis
     - {{ mpi }}
     - numpy >=1.25.1
-    - openblas
+    # Unpinned "openblas" lets the solver satisfy it with the ancient
+    # 0.3.4 ABI-compatibility-shim build conda-forge keeps around for its
+    # generic libblas/liblapack dispatch layer -- that build doesn't
+    # actually use the libgfortran5 run_exports pulls in, so anything
+    # linking it (proteus's superluWrappers extension, in particular)
+    # fails at import time with "libgfortran.so.3: cannot open shared
+    # object file" since only libgfortran.so.5 is provided. A lower
+    # bound is enough to keep the solver on a real, current build.
+    - openblas >=0.3.20
     - parmetis
     - petsc4py
     - petsc
