@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.8.3" %}
-{% set build = 2 %}
+{% set build = 8 %}
 {% set sha256 = "315f0600044e2ad86592c248a9a4ca87dc58c1d678af2c27a9ddde802b555618" %}
 
 package:
@@ -35,17 +35,42 @@ requirements:
     - metis
     - {{ mpi }}
     - numpy >=1.25.1
-    - openblas
+    # Unpinned "openblas" lets the solver satisfy it with the ancient
+    # 0.3.4 ABI-compatibility-shim build conda-forge keeps around for its
+    # generic libblas/liblapack dispatch layer -- that build doesn't
+    # actually use the libgfortran5 run_exports pulls in, so anything
+    # linking it (proteus's superluWrappers extension, in particular)
+    # fails at import time with "libgfortran.so.3: cannot open shared
+    # object file" since only libgfortran.so.5 is provided. A lower
+    # bound is enough to keep the solver on a real, current build.
+    - openblas >=0.3.20
     - parmetis
     - petsc4py
     - petsc
+    # real_*, not complex_*: proteus's C++ is built with -DPETSC_SKIP_COMPLEX
+    # and assumes real PETSC_SCALAR throughout. Without this filter the
+    # solver is free to pick either scalar variant. Kept as a separate entry
+    # (like hdf5's mpi_prefix filter below) rather than replacing the bare
+    # "petsc" line above, since conda-build's variant-based version pinning
+    # (from conda_build_config.yaml) is only applied to a literal bare
+    # package name in the recipe text.
+    #
+    # petsc4py itself has no equivalent "real_*"/"complex_*" build string
+    # (its own recipe.yaml has no `build.string` override, just a generic
+    # hash) -- it's already correctly filtered indirectly, since its own
+    # host requirement is `petsc ${version_xy}.* ${scalar}_*`, so once
+    # petsc itself is pinned to real_* here, any petsc4py built against
+    # complex petsc becomes unsatisfiable on its own.
+    - petsc * real_*
     - python
     - scorec >=2.2.8
     - triangle
     - superlu
     - superlu_dist
-    - pychrono >=9
+    - pychrono >=9,<10
     - mpi4py
+    # include-paths changed in 0.25
+    - xtensor <0.26
     - xtensor-python
     - eigen
     # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
@@ -57,7 +82,7 @@ requirements:
     - tetgen
     - triangle
     - ncurses
-    - pychrono >=9
+    - pychrono >=9,<10
     - scorec >=2.2.8
     - python 3
     - {{ pin_compatible('openblas', max_pin='x.x') }}
