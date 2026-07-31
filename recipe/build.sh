@@ -7,5 +7,14 @@
 export CFLAGS="${CFLAGS} -Wno-error=implicit-function-declaration -Wno-error=incompatible-pointer-types"
 export CXXFLAGS="${CXXFLAGS} -Wno-error=implicit-function-declaration -Wno-error=incompatible-pointer-types"
 
+# Clang 19.1+ made P0522 "relaxed template-template-argument matching" the
+# default, which makes xtensor's rebind_container<X, svector<...>> resolve
+# to two partial specializations simultaneously ("ambiguous partial
+# specializations of 'rebind_container<...>'" at xutils.hpp) -- xtensor's
+# own clang/gcc branch there predates this default flip
+# (https://github.com/llvm/llvm-project/issues/91504). Restore the pre-19.1
+# matching rules for this compiler; GCC/libstdc++ (linux) is unaffected.
+export CXXFLAGS="${CXXFLAGS} -fno-relaxed-template-template-args"  # [osx]
+
 python setup.py build
 $PYTHON -m pip install -v --no-build-isolation --no-deps .
