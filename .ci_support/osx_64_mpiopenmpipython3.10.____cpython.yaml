@@ -36,6 +36,8 @@ openblas:
 - 0.3.*
 openmpi:
 - '5'
+petsc:
+- '3.25'
 petsc4py:
 - '3.25'
 pin_run_as_build:
