@@ -14,7 +14,12 @@ export CXXFLAGS="${CXXFLAGS} -Wno-error=implicit-function-declaration -Wno-error
 # own clang/gcc branch there predates this default flip
 # (https://github.com/llvm/llvm-project/issues/91504). Restore the pre-19.1
 # matching rules for this compiler; GCC/libstdc++ (linux) is unaffected.
-export CXXFLAGS="${CXXFLAGS} -fno-relaxed-template-template-args"  # [osx]
+# NOTE: build.sh isn't preprocessed for meta.yaml-style "# [osx]" selectors,
+# so this has to be a real shell conditional or it leaks onto the GCC/linux
+# build too (which rejects the flag outright).
+if [[ "$(uname)" == "Darwin" ]]; then
+    export CXXFLAGS="${CXXFLAGS} -fno-relaxed-template-template-args"
+fi
 
 python setup.py build
 $PYTHON -m pip install -v --no-build-isolation --no-deps .
