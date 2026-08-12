@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.8.3" %}
-{% set build = 19 %}
+{% set build = 20 %}
 {% set sha256 = "315f0600044e2ad86592c248a9a4ca87dc58c1d678af2c27a9ddde802b555618" %}
 
 package:
@@ -13,10 +13,14 @@ source:
   sha256: {{ sha256 }}
   patches:
     # v1.8.3's setup.py hard-codes -mavx (x86-only) for MeshSmoothing and
-    # cMoveMeshMonitor, which fails outright on arm64 ("unsupported option
-    # '-mavx' for target arm64-apple-darwin..."). Fixed upstream after this
-    # release (erdc/proteus commit 13d526b1) but not yet in a new tag.
-    - fix-arm64-avx.patch  # [osx and arm64]
+    # cMoveMeshMonitor, which fails outright on any non-x86 target ("error:
+    # unrecognized command-line option '-mavx'" on linux-aarch64;
+    # "unsupported option '-mavx' for target arm64-apple-darwin..." on
+    # osx-arm64). Fixed upstream after this release (erdc/proteus commit
+    # 13d526b1) but not yet in a new tag. conda-build's arm64/aarch64
+    # selectors are OS-specific names for the same architecture (osx uses
+    # "arm64", linux uses "aarch64"), so both are needed here.
+    - fix-arm64-avx.patch  # [(osx and arm64) or (linux and aarch64)]
     # xtensor moved xio.hpp from xtensor/xio.hpp to xtensor/io/xio.hpp
     # sometime after the xtensor version this release was written against
     # (confirmed: gone in 0.27.1, only the new path exists). Only matters
