@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.8.3" %}
-{% set build = 20 %}
+{% set build = 21 %}
 {% set sha256 = "315f0600044e2ad86592c248a9a4ca87dc58c1d678af2c27a9ddde802b555618" %}
 
 package:
@@ -21,13 +21,17 @@ source:
     # selectors are OS-specific names for the same architecture (osx uses
     # "arm64", linux uses "aarch64"), so both are needed here.
     - fix-arm64-avx.patch  # [(osx and arm64) or (linux and aarch64)]
-    # xtensor moved xio.hpp from xtensor/xio.hpp to xtensor/io/xio.hpp
-    # sometime after the xtensor version this release was written against
-    # (confirmed: gone in 0.27.1, only the new path exists). Only matters
-    # on linux-aarch64, where the recipe's own xtensor pin above is
-    # relaxed to >=0.27.1 (no older xtensor-python builds exist for that
-    # platform at all) -- every other platform stays on the old xtensor
-    # pin and doesn't need this.
+    # xtensor 0.27.1 reorganized its headers into subdirectories by
+    # category -- xio.hpp -> io/xio.hpp, xarray.hpp -> containers/
+    # xarray.hpp, xview.hpp -> views/xview.hpp, xfixed.hpp -> containers/
+    # xfixed.hpp (confirmed against the actual 0.27.1 source tree; all
+    # four old paths 404). Only matters on linux-aarch64, where the
+    # recipe's own xtensor pin above is relaxed to >=0.27.1 (no older
+    # xtensor-python builds exist for that platform at all) -- every
+    # other platform stays on the old xtensor pin and doesn't need this.
+    # Patches every proteus header that includes any of these four
+    # (ArgumentsDict.h, RANS2P.h, RANS2P2D.h) -- confirmed exhaustive via
+    # a full grep of the source tree for xtensor/* includes.
     - fix-linux-aarch64-xio-path.patch  # [linux and aarch64]
     # The newer xtensor/xtl required on linux-aarch64 (see above) uses
     # both std::conjunction (C++17) and C++20 `concept` syntax
