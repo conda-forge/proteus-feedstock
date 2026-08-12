@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.8.3" %}
-{% set build = 11 %}
+{% set build = 12 %}
 {% set sha256 = "315f0600044e2ad86592c248a9a4ca87dc58c1d678af2c27a9ddde802b555618" %}
 
 package:
@@ -33,6 +33,16 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
     - make
+    # Needed for cross-compiled builds (osx-arm64 built from an osx-64
+    # host): without a build-platform python + cross-python's sysconfig
+    # shim, there is no usable "python"/"$PYTHON" to run setup.py at all
+    # -- $PREFIX/bin/python is a real arm64 binary that can't execute on
+    # the x86_64 build machine ("Bad CPU type in executable"). See
+    # h5py-feedstock's recipe for the same pattern.
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - cython >=3                             # [build_platform != target_platform]
+    - numpy >=1.25.1                         # [build_platform != target_platform]
   host:
     - setuptools
     - cython >=3
