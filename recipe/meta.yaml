@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.8.3" %}
-{% set build = 8 %}
+{% set build = 21 %}
 {% set sha256 = "315f0600044e2ad86592c248a9a4ca87dc58c1d678af2c27a9ddde802b555618" %}
 
 package:
@@ -11,10 +11,47 @@ source:
   fn: proteus-{{ version }}.tar.gz
   url: https://github.com/erdc/proteus/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    # v1.8.3's setup.py hard-codes -mavx (x86-only) for MeshSmoothing and
+    # cMoveMeshMonitor, which fails outright on any non-x86 target ("error:
+    # unrecognized command-line option '-mavx'" on linux-aarch64;
+    # "unsupported option '-mavx' for target arm64-apple-darwin..." on
+    # osx-arm64). Fixed upstream after this release (erdc/proteus commit
+    # 13d526b1) but not yet in a new tag. conda-build's arm64/aarch64
+    # selectors are OS-specific names for the same architecture (osx uses
+    # "arm64", linux uses "aarch64"), so both are needed here.
+    - fix-arm64-avx.patch  # [(osx and arm64) or (linux and aarch64)]
+    # xtensor 0.27.1 reorganized its headers into subdirectories by
+    # category -- xio.hpp -> io/xio.hpp, xarray.hpp -> containers/
+    # xarray.hpp, xview.hpp -> views/xview.hpp, xfixed.hpp -> containers/
+    # xfixed.hpp (confirmed against the actual 0.27.1 source tree; all
+    # four old paths 404). Only matters on linux-aarch64, where the
+    # recipe's own xtensor pin above is relaxed to >=0.27.1 (no older
+    # xtensor-python builds exist for that platform at all) -- every
+    # other platform stays on the old xtensor pin and doesn't need this.
+    # Patches every proteus header that includes any of these four
+    # (ArgumentsDict.h, RANS2P.h, RANS2P2D.h) -- confirmed exhaustive via
+    # a full grep of the source tree for xtensor/* includes.
+    - fix-linux-aarch64-xio-path.patch  # [linux and aarch64]
+    # The newer xtensor/xtl required on linux-aarch64 (see above) uses
+    # both std::conjunction (C++17) and C++20 `concept` syntax
+    # unconditionally in its headers -- but every extension that calls
+    # get_xtensor_include() (exactly the 35 that hard-code -std=c++14)
+    # fails with "'conjunction' is not a member of 'std'" and then, once
+    # bumped only to C++17, "'concept' does not name a type". Bump those
+    # 35 '-std=c++14' occurrences straight to '-std=c++20' instead.
+    # Scoped to linux-aarch64 only, same as the two patches above.
+    - fix-linux-aarch64-cxx20.patch  # [linux and aarch64]
 
 build:
   number: {{ build }}
   skip: true  # [win]
+  # scorec has no openmpi build on osx-arm64 (openmpi's mpicc/mpicxx are
+  # real compiled binaries that can't execute under cross-compilation from
+  # an osx-64 build host, unlike mpich's portable shell-script wrappers --
+  # see scorec-feedstock recipe). Since proteus unconditionally requires
+  # both scorec and {{ mpi }}, the openmpi variant can never solve here.
+  skip: true  # [osx and arm64 and mpi == "openmpi"]
   {% set mpi_prefix = "mpi_" + mpi %}
   string: {{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}
   run_exports:
@@ -27,6 +64,16 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
     - make
+    # Needed for cross-compiled builds (osx-arm64 built from an osx-64
+    # host): without a build-platform python + cross-python's sysconfig
+    # shim, there is no usable "python"/"$PYTHON" to run setup.py at all
+    # -- $PREFIX/bin/python is a real arm64 binary that can't execute on
+    # the x86_64 build machine ("Bad CPU type in executable"). See
+    # h5py-feedstock's recipe for the same pattern.
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - cython >=3                             # [build_platform != target_platform]
+    - numpy >=1.25.1                         # [build_platform != target_platform]
   host:
     - setuptools
     - cython >=3
@@ -63,14 +110,29 @@ requirements:
     # complex petsc becomes unsatisfiable on its own.
     - petsc * real_*
     - python
-    - scorec >=2.2.8
+    # Upper bound: scorec >=3 renamed/restructured its core PCU parallel-
+    # communication API to take an explicit PCU_t handle on every call
+    # (previously global, zero-argument functions) -- see SCOREC/core PR
+    # #433 ("pcu-object-breaking"). proteus's MeshAdaptPUMI C++ glue code
+    # calls the old global-style API directly across ~150 sites in 7
+    # files and hasn't been ported yet. Without this pin the solver is
+    # free to float proteus onto an incompatible scorec build as soon as
+    # one lands on conda-forge (see conda-forge/scorec-feedstock#27).
+    - scorec >=2.2.8,<3
     - triangle
     - superlu
     - superlu_dist
     - pychrono >=9,<10
     - mpi4py
-    # include-paths changed in 0.25
-    - xtensor <0.26
+    # include-paths changed in 0.25. linux-aarch64 only ever had
+    # xtensor-python 0.29.0 built (no older builds exist for that platform
+    # at all), which pulls in xtensor >=0.27.1 -- unsatisfiable against the
+    # <0.26 pin below, so relax it there specifically rather than for
+    # every platform. proteus's only xtensor usage is xt::pyarray<T> as a
+    # plain function-parameter type in ADR.h (xtensor-python/pyarray.hpp),
+    # which is unchanged in 0.29.0, so this is expected to compile fine.
+    - xtensor <0.26  # [not (linux and aarch64)]
+    - xtensor >=0.27.1,<0.28.0a0  # [linux and aarch64]
     - xtensor-python
     - eigen
     # pinning from conda_build_config and build pinning from {{ mpi_prefix }}
@@ -83,7 +145,7 @@ requirements:
     - triangle
     - ncurses
     - pychrono >=9,<10
-    - scorec >=2.2.8
+    - scorec >=2.2.8,<3
     - python 3
     - {{ pin_compatible('openblas', max_pin='x.x') }}
     - {{ pin_compatible('petsc4py', max_pin='x.x') }}
