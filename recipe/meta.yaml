@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.8.3" %}
-{% set build = 10 %}
+{% set build = 11 %}
 {% set sha256 = "315f0600044e2ad86592c248a9a4ca87dc58c1d678af2c27a9ddde802b555618" %}
 
 package:
@@ -15,6 +15,12 @@ source:
 build:
   number: {{ build }}
   skip: true  # [win]
+  # scorec has no openmpi build on osx-arm64 (openmpi's mpicc/mpicxx are
+  # real compiled binaries that can't execute under cross-compilation from
+  # an osx-64 build host, unlike mpich's portable shell-script wrappers --
+  # see scorec-feedstock recipe). Since proteus unconditionally requires
+  # both scorec and {{ mpi }}, the openmpi variant can never solve here.
+  skip: true  # [osx and arm64 and mpi == "openmpi"]
   {% set mpi_prefix = "mpi_" + mpi %}
   string: {{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}
   run_exports:
