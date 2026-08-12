@@ -21,5 +21,5 @@ if [[ "$(uname)" == "Darwin" ]]; then
     export CXXFLAGS="${CXXFLAGS} -fno-relaxed-template-template-args"
 fi
 
-python setup.py build
+$PYTHON setup.py build
 $PYTHON -m pip install -v --no-build-isolation --no-deps .
