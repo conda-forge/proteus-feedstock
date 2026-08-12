@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.8.3" %}
-{% set build = 17 %}
+{% set build = 18 %}
 {% set sha256 = "315f0600044e2ad86592c248a9a4ca87dc58c1d678af2c27a9ddde802b555618" %}
 
 package:
@@ -25,6 +25,17 @@ source:
     # platform at all) -- every other platform stays on the old xtensor
     # pin and doesn't need this.
     - fix-linux-aarch64-xio-path.patch  # [linux and aarch64]
+    # xtl (pulled in transitively by the newer xtensor/xtensor-python
+    # required on linux-aarch64, see above) uses std::conjunction
+    # unconditionally, which is a C++17 standard-library feature -- but
+    # most of proteus's extensions compile with -std=c++14, so every
+    # translation unit that includes ArgumentsDict.h (and therefore
+    # xtensor-python/pyarray.hpp -> ... -> xtl/xtype_traits.hpp) fails
+    # with "'conjunction' is not a member of 'std'". Bump every
+    # '-std=c++14' to '-std=c++17' (a backward-compatible superset for
+    # this codebase); scoped to linux-aarch64 only via this patch's
+    # selector, same as the two patches above.
+    - fix-linux-aarch64-cxx17.patch  # [linux and aarch64]
 
 build:
   number: {{ build }}
