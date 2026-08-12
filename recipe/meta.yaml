@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.8.3" %}
-{% set build = 16 %}
+{% set build = 17 %}
 {% set sha256 = "315f0600044e2ad86592c248a9a4ca87dc58c1d678af2c27a9ddde802b555618" %}
 
 package:
@@ -17,6 +17,14 @@ source:
     # '-mavx' for target arm64-apple-darwin..."). Fixed upstream after this
     # release (erdc/proteus commit 13d526b1) but not yet in a new tag.
     - fix-arm64-avx.patch  # [osx and arm64]
+    # xtensor moved xio.hpp from xtensor/xio.hpp to xtensor/io/xio.hpp
+    # sometime after the xtensor version this release was written against
+    # (confirmed: gone in 0.27.1, only the new path exists). Only matters
+    # on linux-aarch64, where the recipe's own xtensor pin above is
+    # relaxed to >=0.27.1 (no older xtensor-python builds exist for that
+    # platform at all) -- every other platform stays on the old xtensor
+    # pin and doesn't need this.
+    - fix-linux-aarch64-xio-path.patch  # [linux and aarch64]
 
 build:
   number: {{ build }}

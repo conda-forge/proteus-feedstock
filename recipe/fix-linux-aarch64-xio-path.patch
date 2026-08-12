@@ -1,0 +1,13 @@
+diff --git a/proteus/mprans/ArgumentsDict.h b/proteus/mprans/ArgumentsDict.h
+index 1111111..2222222 100644
+--- a/proteus/mprans/ArgumentsDict.h
++++ b/proteus/mprans/ArgumentsDict.h
+@@ -5,7 +5,7 @@
+ #include <stdexcept>
+ #include <string>
+ #include "xtensor-python/pyarray.hpp"
+-#include "xtensor/xio.hpp"
++#include "xtensor/io/xio.hpp"
+
+ namespace proteus
+ {
