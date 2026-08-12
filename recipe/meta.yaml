@@ -1,6 +1,6 @@
 {% set name = "proteus" %}
 {% set version = "1.8.3" %}
-{% set build = 12 %}
+{% set build = 13 %}
 {% set sha256 = "315f0600044e2ad86592c248a9a4ca87dc58c1d678af2c27a9ddde802b555618" %}
 
 package:
@@ -11,6 +11,12 @@ source:
   fn: proteus-{{ version }}.tar.gz
   url: https://github.com/erdc/proteus/archive/{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    # v1.8.3's setup.py hard-codes -mavx (x86-only) for MeshSmoothing and
+    # cMoveMeshMonitor, which fails outright on arm64 ("unsupported option
+    # '-mavx' for target arm64-apple-darwin..."). Fixed upstream after this
+    # release (erdc/proteus commit 13d526b1) but not yet in a new tag.
+    - fix-arm64-avx.patch  # [osx and arm64]
 
 build:
   number: {{ build }}
