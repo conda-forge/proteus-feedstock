@@ -9,7 +9,7 @@ Package license: MIT
 
 Summary: Proteus is a Python package for rapidly developing computer models and numerical methods.
 
-Development: https://github.com/erdc/proteus
+Development: https://github.com/proteustoolkit/proteus
 
 Current build status
 ====================
